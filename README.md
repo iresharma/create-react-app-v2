@@ -19,6 +19,7 @@ Just give this script an execute permission, and run it (to keep thing simple ju
 ## Please contribute
 
 Todo
+- [x] Basic Validation
 - [ ] Support for various component packages like
   - [ ] [Ant design](https://ant.design/docs/react/introduce)
   - [ ] [Material UI](https://material-ui.com)
