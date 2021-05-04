@@ -7,6 +7,12 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+if [ "$#" -ne 1 ]
+then 
+  echo "${RED}Please provide a project name! ❌${NC}"
+  exit 1
+fi
+
 echo "${BLUE}Running create-react-app-v2 🚀${NC}"
 npx create-react-app $1
 cd "$1/"
@@ -17,7 +23,7 @@ clear
 echo "${YELLOW}Moving into the react app directory 📂${NC}"
 
 # Deleting F up files
-echo "${YELLOW}deleting unwanted files 🗑${NC}"
+echo "${YELLOW}Deleting unwanted files 🗑${NC}"
 rm -rf src/
 
 # Making new src
@@ -30,7 +36,7 @@ echo "${YELLOW}Making required directories${NC}"
 for i in "assets" "components" "pages" "css"
 do
     mkdir $i
-    echo "Made $i"
+    echo "Created $i 📂"
 done
 
 # Moving assets
@@ -40,7 +46,7 @@ cp ../public/logo512.png ./assets/
 echo "${RED}Do you want webVitals and texts ?(y/N)${NC}"
 read WEB_AND_TEST
 
-if [ "$WEB_AND_TEST" = "y" ]; then
+if [ "$WEB_AND_TEST" = "y" ] || [ "$WEB_AND_TEST" = "Y" ] || [ "$WEB_AND_TEST" = "yes" ]; then
 cat > reportWebVitals.js << EOF
 const reportWebVitals = onPerfEntry => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
@@ -124,7 +130,7 @@ const Footer = () => {
   return (
     <>
       <div style={styles}>
-          <span>Made with 🧠 by Iresharma</span>
+          <span>Made with 🧠 by Iresharma and buddies!</span>
           <span style={{display: 'flex'}}>
             <UseAnimations onClick={() => window.open('https://github.com/iresharma', '_blank')} animation={github} strokeColor="white" /> &nbsp;&nbsp;&nbsp;
             <UseAnimations onClick={() => window.open('https://www.linkedin.com/in/iresharma/', '_blank')} animation={linkedin} strokeColor="white" /> &nbsp;&nbsp;&nbsp;
@@ -163,7 +169,7 @@ echo "${RED}Want a react-router-dom ? (y/N)${NC}"
 read ROUTER
 
 # App.jsx
-if [ "$ROUTER" = "y" ]; then
+if [ "$ROUTER" = "y" ] || [ "$ROUTER" = "Y" ] || [ "$ROUTER" = "yes" ]; then
 echo "${YELLOW}Working on router 🗺${NC}"
 npm install react-router-dom
 clear
@@ -280,7 +286,7 @@ cd ../
 echo "${RED}Include Firebase 🔥(y/N)${NC}"
 read FIRE
 
-if [ "$FIRE" = "y" ]; then
+if [ "$FIRE" = "y" ] || [ "$FIRE" = "Y" ] || [ "$FIRE" = "yes" ]; then
 mkdir firebase
 cd firebase/
 cat > firebaseConfig.js << EOF
@@ -288,12 +294,12 @@ import firebase from "firebase";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_apiKey,
-  authDomain: process.env.REACT_APP_authDomain,
-  projectId: process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_appId,
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
@@ -305,18 +311,20 @@ EOF
 
 cd ../../
 cat > .env << EOF
-REACT_APP_apiKey=
-REACT_APP_authDomain=
-REACT_APP_projectId=
-REACT_APP_storageBucket=
-REACT_APP_messagingSenderId=
-REACT_APP_appId=
+REACT_APP_APIKEY=
+REACT_APP_AUTH_DOMAIN=
+REACT_APP_PROJECT_ID=
+REACT_APP_STORAGE_BUCKET=
+REACT_APP_MESSAGE_SENDER_ID=
+REACT_APP_APP_ID=
 EOF
 echo ".env" >> .gitignore
 fi
 
+echo "${GREEN}Remember to add all the firebase config details in .env file! ${NC}"
+
 git add .
-git commit -m "Made changes uses create-react-app-v2 by @Iresharma"
+git commit -m "Made changes using create-react-app-v2 by Iresharma and buddies!🎉"
 
 clear
 echo "${GREEN}React app created${NC}"
